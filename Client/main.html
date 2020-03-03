@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stat Tracker</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="app">
+
+            <!-- MAIN MENU PAGE -->
+
+            <div id="mainMenu" v-show="displayMain">
+                <div id="title">
+                    <img id="stlogo" src="Pics/ST_logo.png">
+                    <h1><p id="orangeTitle">Stat</p> Tracker</h1>
+                </div>
+                <div class="menuItemContainer" v-on:click="startGameButton">
+                    <img id="basketballPic" src="Pics/baskeball.png">
+                    <h2>Start Game</h2>
+                </div>
+                <div class="menuItemContainer" v-on:click="myTeamButton">
+                    <img id="basketballPic" src="Pics/baskeball.png">
+                    <h2>My Team</h2>
+                </div>
+                <div class="menuItemContainer" v-on:click="gameHistoryButton">
+                    <img id="basketballPic" src="Pics/baskeball.png">
+                    <h2>Game History</h2>
+                </div>
+            </div>
+
+            <!-- IN GAME PAGE -->
+
+            <div id="inGamePage" v-show="showInGame">
+                <button id="backToHome" v-on:click="backToHomeButton"><img id="backImage" src="Pics/back_arrow.png"></button>
+                <div class="pageTitle">
+                    <img id="smallLogo" src="Pics/ST_logo.png">
+                    <h1 id="smallerTitle"><p id="orangeTitle">Stat</p> Adder</h1>
+                </div>
+                <div class="stat_button_container">
+                    <button class="statButton add1pt" v-on:click="stat = 1, addScoreButton(stat)" >+1 Pt</button>
+                    <button class="statButton add2pt" v-on:click="stat = 2, addScoreButton(stat)">+2 Pt</button>
+                </div>
+                <div class="stat_button_container">
+                    <button class="statButton add3pt" v-on:click="stat = 3, addScoreButton(stat)">+3 Pt</button>
+                    <button class="statButton min1pt" v-on:click="stat = -1, addScoreButton(stat)">-1 Pt</button>
+                </div>
+                <div class="stat_button_container">
+                    <button class="statButton reb" v-on:click="addRebButton">Reb</button>
+                    <button class="statButton asst" v-on:click="addAsstButton">Asst</button>
+                    <button class="statButton stl" v-on:click="addStlButton">Stl</button>
+                </div>
+                <div class="stat_button_container">
+                    <button class="statButton bl" v-on:click="addBlkButton">Blk</button>
+                    <button class="statButton to" v-on:click="addTOButton">TO</button>
+                    <button class="statButton foul" v-on:click="addFoulButton">Foul</button>
+                </div>
+                <div class="backFooter" v-on:click="backToHomeButton">
+                    <button id="backToHome"><img id="backImage" src="Pics/back_arrow.png"><h1 id="footerText"><p id="orangeTitle">Return</p> Home</h1></button>
+                </div>
+            </div>
+
+            <!-- MY TEAM PAGE -->
+
+            <div id="myTeamPage" v-show="showMyTeam">
+                <button id="backToHome" v-on:click="backToHomeButton"><img id="backImage" src="Pics/back_arrow.png"></button>
+                <div class="pageTitle">
+                    <img id="smallLogo" src="Pics/ST_logo.png">
+                    <h1 id="smallerTitle"><p id="orangeTitle">My</p> Team</h1>
+                </div>
+                <div id="addPlayerContainer" v-on:click="addPlayerButton">
+                    <button id="addPlayerButton"><img id="plusImage" src="Pics/plus.png"></button>
+                    <h1 id="addPlayerText">Add Player</h1>
+                </div>
+                <ul class="playersContainer">
+                    <li id="playerBlock" v-for="player in players" style="list-style-type:none">
+                        <div id="playerPic">
+                            <img id="playerPicture" src="Pics/player.png">
+                        </div>
+                        <div id="listWrapper">
+                            <!--Show player image here-->
+                            <strong>Name: {{player.player_name}}</strong><br>
+                            <p id="listItems">PPG: {{player.player_ppg}} <strong>|</strong> </p>
+                            <p id="listItems">Rebounds: {{player.player_rebounds}} <br></p>
+                            <p id="listItems">Assists: {{player.player_assists}} <strong>|</strong> </p>
+                            <p id="listItems">Steals: {{player.player_steals}}</p><br>
+                            <p id="listItems">Blocks: {{player.player_blocks}} <strong>|</strong> </p>
+                            <p id="listItems">T/O: {{player.player_turnovers}} <strong>|</strong> </p>
+                            <p id="listItems">Fouls: {{player.player_fouls}}</p><br>
+                        </div>
+                        <div id="deleteWrapper">
+                            <button id="deletePlayerButton" v-on:click=" playerId = player._id, deletePlayer(player)">Delete</button>
+                            <button id="editPlayerButton" v-on:click="playerId = player._id, currentEditObject = player.player_name, editPlayer(player)">Edit</button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="backFooter" v-on:click="backToHomeButton">
+                    <button id="backToHome"><img id="backImage" src="Pics/back_arrow.png"></button>
+                    <h1 id="footerText"><p id="orangeTitle">Return</p> Home</h1>
+                </div>
+            </div>
+
+            <!-- ADD PLAYER PAGE-->
+
+            <div id="addPlayerPage" v-show="showAddPlayerPage">
+                <button id="backToHome" v-on:click="backToMyTeamButton"><img id="backImage" src="Pics/back_arrow.png"></button>
+                <div class="pageTitle">
+                    <img id="smallLogo" src="Pics/ST_logo.png">
+                    <h1 id="smallerTitle"><p id="orangeTitle">Add</p> Player:</h1>
+                </div>
+                <div id="addPlayerForm">
+                    <!--Input a picture for the player here-->
+                    <input id="addPlayerField" v-model="newPlayerName" placeholder="Player Name...">
+                    <div id="requirementErrors" v-if="errors.length">
+                        There were errors trying to add this player:
+                        <ul>
+                            <li v-for="error in errors">
+                                {{error}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="submitAddPlayerWrapper">
+                    <button id="submitAddPlayerButton" v-on:click="submitAddPlayer">Submit New Player</button>
+                </div>
+                <img id="playerOutlineImg" src="Pics/playerOutline.png">
+                <div class="backFooter" v-on:click="backToMyTeamButton">
+                    <button id="backToHome"><img id="backImage" src="Pics/back_arrow.png"></button>
+                    <h1 id="footerText"><p id="orangeTitle">Return</p> to Team</h1>
+                </div>
+            </div>    
+
+            <!--EDIT PLAYER PAGE-->
+
+            <div id="EditPlayerPage" v-show="showEditPlayerPage">
+                <button id="backToHome" v-on:click="backToMyTeamButton"><img id="backImage" src="Pics/back_arrow.png"></button>
+                <div class="pageTitle">
+                    <img id="smallLogo" src="Pics/ST_logo.png">
+                    <h1 id="smallerTitle"><p id="orangeTitle">Edit</p> Player:</h1>
+                </div>
+                <div id="editPlayerPicture">
+                    <img id="largePlayerPic" src="Pics/player.png">
+                </div>
+                <div id="addPlayerForm">
+                    <!--Change the picture for the player here-->
+                    <input id="addPlayerField" v-model="newPlayerName" :placeholder="[[currentEditObject]]">
+                </div>
+                <div id="saveTeamContainer">
+                    <button id="saveButton" v-on:click="editSaveButtonClicked(playerId, newPlayerName)">Save</button>
+                </div>
+                <div class="backFooter" v-on:click="backToMyTeamButton">
+                    <button id="backToHome"><img id="backImage" src="Pics/back_arrow.png"></button>
+                    <h1 id="footerText"><p id="orangeTitle">Return</p> to Team</h1>
+                </div>
+            </div>
+
+            <!-- ADD TO PLAYER PAGE -->
+
+            <div id="AddToPlayerPage" v-show="showAddToPlayerPage">
+                <button id="backToHome" v-on:click="backToInGameButton"><img id="backImage" src="Pics/back_arrow.png"></button>
+                <div class="pageTitle">
+                    <img id="smallLogo" src="Pics/ST_logo.png">
+                    <h1 id="smallerTitle"><p id="orangeTitle">Add</p> To:</h1>
+                </div>
+                <ul class="playersContainer">
+                    <li id="smallPlayerBlock" v-for="player in players" style="list-style-type:none">
+                        <div id="playerPic">
+                            <img id="playerPicture" src="Pics/player.png">
+                        </div>
+                        <div id="listWrapper">
+                            <strong id="boldName">{{player.player_name}}</strong><br><br>
+                            <p id="listItems">PPG: {{player.player_ppg}} <strong>|</strong> </p>
+                            <p id="listItems">Rebounds: {{player.player_rebounds}} <br></p>
+                            <p id="listItems">Assists: {{player.player_assists}} <strong>|</strong> </p>
+                            <p id="listItems">Steals: {{player.player_steals}}</p><br>
+                            <p id="listItems">Blocks: {{player.player_blocks}} <strong>|</strong> </p>
+                            <p id="listItems">T/O: {{player.player_turnovers}} <strong>|</strong> </p>
+                            <p id="listItems">Fouls: {{player.player_fouls}}</p><br>
+                        </div>
+                        <div id="addToPlayerWrapper">
+                            <button id="addToPlayerButton" v-on:click="addedStatToPlayer(stat)">Add to {{player.player_name}}</button>
+                        </div>
+                    </li>
+                </ul>
+                <div class="backFooter" v-on:click="backToInGameButton">
+                    <button id="backToHome"><img id="backImage" src="Pics/back_arrow.png"></button>
+                    <h1 id="footerText"><p id="orangeTitle">Return</p> to Game</h1>
+                </div>
+            </div>
+
+            <!--GAME HISTORY PAGE-->
+            <div id="myTeamPage" v-show="showGameHistory">
+                <button id="backToHome" v-on:click="backToHomeButton"><img id="backImage" src="Pics/back_arrow.png"></button>
+                <div class="pageTitle">
+                    <img id="smallLogo" src="Pics/ST_logo.png">
+                    <h1 id="smallerTitle"><p id="orangeTitle">My</p> Team</h1>
+                </div>
+                <div class="backFooter" v-on:click="backToHomeButton">
+                    <button id="backToHome"><img id="backImage" src="Pics/back_arrow.png"></button>
+                    <h1 id="footerText"><p id="orangeTitle">Return</p> Home</h1>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
+
+<!-- <div v-on:click> or v-model, v-for, v-if="myBool", v-else, v-show, v-hide -->

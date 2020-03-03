@@ -1,0 +1,335 @@
+*{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+html{
+    background-color: rgb(97, 97, 97);
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#app{
+    background-color: rgba(20, 20, 20, 0.63);
+}
+body{
+    margin: 0px;
+    width: 100%;
+}
+#title{
+    text-align: center;
+    top: 0;
+}
+h1{
+    width: 100%;
+    font-size: 150px;
+    text-align: center;
+    margin-top: 16px;
+    margin-left: 10px;
+    margin-bottom: 16px;
+    display: block;
+    color: white;
+}
+h2{
+    width: 100%;
+    font-size: 110px;
+    text-align: center;
+    margin: 20px 20px;
+    display: block;
+    color: orange;
+    display: inline;
+}
+#stlogo{
+    width: 400px;
+    height: 400px;
+    text-align: center;
+    vertical-align: bottom;
+    margin-top: 20px;
+    margin-bottom: 16px;
+    filter: invert(100%);
+}
+.statButton {
+    background-color: rgb(57, 58, 57);
+    color: white;
+    font-size: 70px;
+    text-align: center;
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    margin: 30px 75px;
+    cursor: pointer;
+}
+.add1pt, .add2pt, .add3pt {
+    border-radius: 50%;
+    box-shadow: 0 0 10px lime;
+}
+.min1pt{
+    border-radius: 50%;
+    box-shadow: 0 0 10px red;
+}
+.reb, .asst, .stl, .bl, .to, .foul{
+    border-radius: 50%;
+    font-size: 50px;
+    text-align: center;
+    width: 230px;
+    height: 230px;
+    margin: 30px 30px;
+    box-shadow: 0 0 10px black;
+}
+.stat_button_container{
+    text-align: center;
+}
+.menuItemContainer{
+    text-align: center;
+    border: 2px solid black;
+    padding: 30px 10px;
+    cursor: hand;
+    cursor: pointer;
+    opacity: .9;
+}
+#basketballPic{
+    height: 80px;
+    width: 80px;
+    display: inline;
+    margin-top: 16px;
+    overflow: hidden;
+    filter: invert(100%);
+}
+#orangeTitle{
+    color: orange;
+    display: inline;
+}
+.pageTitle{
+    text-align: center;
+    top: 0;
+    border-bottom: 3px solid black;
+    margin-top: -20px;
+    padding-bottom: 20px;
+}
+#smallLogo{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: bottom;
+    margin: 16px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    filter: invert(100%);
+}
+#smallerTitle{
+    font-size: 120px;
+    text-align: center;
+    margin-top: 16px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    display: block;
+    color: white;
+    display: inline;
+}
+#backImage{
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    vertical-align: bottom;
+    margin: 16px;
+    float: left;
+    filter: invert(100%);
+}
+#footerText{
+    color: white;
+    font-size: 100px;
+    display: inline;
+    vertical-align: top;
+}
+.backFooter{
+    text-align: center;
+    border: 1px solid black;
+    display: block;
+}
+#addPlayerContainer{
+    text-align: center;
+    background-color: rgb(172, 171, 171);
+    border: 2px solid rgb(54, 54, 54);
+    padding-bottom: 30px;
+    padding-top: 30px;
+    width: 97%;
+    margin: auto;
+    margin-top: 10px;
+}
+#plusImage{
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    vertical-align: baseline; 
+    margin: 16px;
+    float: left;
+    background-color: rgb(54, 54, 54);
+}
+#addPlayerText{
+    color: rgb(54, 54, 54);
+    font-size: 100px;
+    display: inline;
+    vertical-align: top;
+}
+#saveTeamContainer{
+    text-align: right;
+    display: block;
+    margin: 30px;
+}
+#saveButton{
+    font-size: 60px;
+    background-color: orange;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    width: 30%;
+    height: 100px;
+}
+.playersContainer, .scoresContainer{
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 0px;
+    border: 2px solid rgb(54, 54, 54);
+    margin: 0px;
+}
+#listWrapper{
+    display: inline;
+    margin-bottom: 15px;
+}
+#listItems, strong{
+    display: inline;
+    font-size: 20px;
+}
+#deleteWrapper{
+    display: inline;
+    margin: auto;
+}
+#deletePlayerButton{
+    font-size: 40px;
+    background-color: rgb(192, 39, 39);
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    height: 55px;
+    margin-right: 15%;
+    margin-left: 5%;
+    display: block;
+    margin-bottom: 10px;
+    display: inline;
+}
+#playerPicture{
+    width: 220px;
+    height: 90%;
+    text-align: center;
+    vertical-align: bottom;
+    margin: 0px;
+    margin-right: 3px;
+    float: left;
+}
+#editPlayerButton{
+    font-size: 40px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: orange;
+    text-align: center;
+    height: 55px;
+    width: 127px;
+    margin-right: 20px;
+    display: inline;
+    margin-right: 10%;
+}
+#smallPlayerBlock{
+    display: inline-block;
+    background-color: rgb(172, 171, 171);
+    border: 2px solid rgb(54, 54, 54);
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    width: 46%;
+    margin: 15px;
+}
+#playerBlock{
+    display: block;
+    background-color: rgb(172, 171, 171);
+    border: 2px solid rgb(54, 54, 54);
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    width: 98%;
+}
+#scoresBlock{
+    display: block;
+    background-color: rgb(172, 171, 171);
+    border: 2px solid rgb(54, 54, 54);
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px; 
+    width: 98%;
+}
+#addToPlayerWrapper{
+    text-align: center;
+    margin-top: -10px;
+}
+#addToPlayerButton{
+    font-size: 30px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: orange;
+    text-align: center;
+    height: 75px;
+    width: 80%;
+}
+#boldName{
+    font-size: 30px;
+}
+#addPlayerForm{
+    text-align: center;
+}
+#addPlayerField{
+    height: 120px;
+    width: 95%;
+    margin-top: 10px;
+    font-size: 80px;
+    padding-left: 10px;
+}
+#submitAddPlayerWrapper{
+    text-align: center;
+    margin: 15px 0px;
+}
+#submitAddPlayerButton{
+    font-size: 60px;
+    background-color: orange;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    width: 95%;
+    height: 100px;
+}
+#playerOutlineImg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 60%;
+    height: 750px;
+}
+#requirementErrors{
+    color: red;
+    font-size: 40px;
+}
+#editPlayerPicture{
+    text-align: center;
+}
+#largePlayerPic{
+    width: 220px;
+    height: 250px;
+}
+#listItems{
+    font-size: 22px;
+}
